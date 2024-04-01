@@ -33,12 +33,12 @@
   //idente o refactorice de ser necesario
   //el resultado no deberia cambiar
 
-  const capi = (word: string): string => {
+  const toCapitalCase = (word: string): string => {
     const concatWord = word.toLowerCase();
     return concatWord.charAt(0).toUpperCase() + concatWord.substring(1);
   };
 
-  console.log(capi("cAPrIcOrn"));
+  console.log(toCapitalCase("cAPrIcOrn"));
 
   //variable que alerta en caso de que algun evento suceda
   let alertEvent: boolean = true;

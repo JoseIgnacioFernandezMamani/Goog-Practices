@@ -156,12 +156,128 @@ Ahora nuestra logica es extensible, si tendriamos que añadir otro tipo de base 
 Esto significa que, dado que la clase B es una subclase de la clase A, deberíamos poder pasar un objeto de la clase B a cualquier método que espere un objeto de la clase A y el método no debería dar ningún resultado extraño en ese caso.
 
 ### I: Principio de segregación de interfaz
+
+**mantener las interfaces separadas**
+
+Muchas interfaces que detallan tareas especificas son mejores que una interfaz de proposito general.
+
+Si tenemos una interfaz encargada de dar el comportamiento de un estacionamiento.
+
+```java
+public interface Estacionamiento {
+
+	void aparcarCoche(); // Reducir el recuento de puntos vacíos en 1
+	void sacarCoche(); // Aumenta los espacios vacíos en 1
+	void getCapacidad(); // Devuelve la capacidad del coche
+	double calcularTarifa(Coche coche); // Devuelve el precio en función del número de horas.
+	void hacerPago(Coche coche);
+}
+```
+
+Pero, solo funciona para estacionamientos de pago, si quisieramos implementar un estacionamiento gratuito.
+
+```java
+public class EstacionamientoGratis implements Estacionamiento {
+
+	@Override
+	public void aparcarCoche() {
+		
+	}
+
+	@Override
+	public void sacarCoche() {
+
+	}
+
+	@Override
+	public void getCapacidad() {
+
+	}
+
+	@Override
+	public double calcularTarifa(Coche coche) {
+		return 0;
+	}
+
+	@Override
+	public void hacerPago(Coche coche) {
+		throw new Exception("Estacionamiento es gratis");
+	}
+}
+```
+
+Tanto el metodo, "calcularTarifa" como "hacerPago" son irelevantes en le contexto de un estacionamiento gratis.
+
+Debemos dividir la logica, una relacionada con el cmportamiento del estacionamiento y otra con la transacción.
+
+Segregando las interfaces tenemos algo como:
+
+![interfaceSegregationsDiagram](public/images/interface-segregaion.png)
+
+Veremos como logramos separar las interfaces que describen los estacionamientos pagados y otra para estacionamientos gratis, de esta forma se pueden utilizar las interfaces dependiento si se debe implemetar, estacionamientos de pago o gratuitos.
+
 ### D: Principio de inversion de dependencia
-###
 
+**Nuestras clases debepender de interfaces o clases abstractas en lugar de clases y funciones concretas**
 
+Si queremos que nuestras clases puedan extenderse, estas deben depender de interfaces en lugar de clases concretas.
 
+En su artículo (2000), el tío Bob resume este principio de la siguiente manera:
 
+    "Si el PAC establece el objetivo de la arquitectura OO, el PID establece el mecanismo principal".
+
+**Si PAC establece el objetivo de la arquitectura** Principio de Arquitectura Componible
+
+    Si se desea lograr arquitectura Orientada a Objetos
+
+**Principio de Inversión de Dependencia**
+
+    Debemos desacoplar las dependencias rigidas de los objetos.
+
+Como ejemplo: Si tenemos una clase "Motor" y otra "Car"
+
+```typescript
+interface IMotor {
+    on(): void;
+    off(): void;
+}
+
+class Motor implements IMotor {
+    on(): void {
+        console.log("Motor on");
+    }
+
+    off(): void {
+        console.log("Motor off");
+    }
+}
+
+class Car {
+    private motor: IMotor;
+
+    constructor(motor: IMotor) {
+        this.motor = motor;
+    }
+
+    start() {
+        this.motor.on();
+        console.log("star car");
+    }
+
+    stop() {
+        this.motor.off();
+        console.log("stop car");
+    }
+}
+
+const motor = new Motor();
+const car = new Car(motor);
+
+car.iniciar();
+car.detener();
+```
+
+Si desearimos cambiar la funcionalidad de la clase "motor", simplemente creamos una nueva clase que implemente IMotor.
 
 ### Caracteristicas de un buen sistema:
     Robustez
