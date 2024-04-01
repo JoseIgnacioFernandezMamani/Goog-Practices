@@ -1,78 +1,74 @@
 (() => {
-
   /* NOMBRE CORRECTAMETE LAS SIGUIENTES VARIABLES 
      ADEMAS DE COMPROBAR SI USA LET O CONST,
     SE PUEDE REFACTORIZAR, ETC.
   */
 
   //lista de emails de usuarios de Meta-X
-  const l: Array<string> = [
-    "email1@gmail.com", 
-    "email1@gmail.com", 
-    "email1@gmail.com"
+  const emailList: Array<string> = [
+    "email1@gmail.com",
+    "email1@gmail.com",
+    "email1@gmail.com",
   ];
 
-  console.log(l);
+  console.log(emailList);
 
   //Lista de compras de un carrito
-  const var2: Array<Object> = [
-    {product: "switch"},
-    {product: "X-box Controller"},
-    {product: "steam-gift-card"},
+  const cart: Array<Object> = [
+    { product: "switch" },
+    { product: "X-box Controller" },
+    { product: "steam-gift-card" },
   ];
 
-  console.log(var2);
-  
+  console.log(cart);
 
   //funcion para sumar mas 3 a un numero y retornarlo
-  const fff = (asdfg: number): number => {
-    return asdfg + 3;
-  }
+  const sumFunction = (number: number): number => {
+    return number + 3;
+  };
 
-  console.log(fff(2));
-  
-  
+  console.log(sumFunction(2));
+
   //funcion para capitalizar una palabra pasara por params
   //idente o refactorice de ser necesario
   //el resultado no deberia cambiar
-  function capi(w: string): string {
-    w.toLowerCase();    
-    const c = w.charAt(0).toUpperCase().toString().concat(w.substring(1, w.length));
-    return c;
-  }
 
-  console.log(capi("capricorn"));
-  
+  const capi = (word: string): string => {
+    const concatWord = word.toLowerCase();
+    return concatWord.charAt(0).toUpperCase() + concatWord.substring(1);
+  };
+
+  console.log(capi("cAPrIcOrn"));
+
   //variable que alerta en caso de que algun evento suceda
-  let www: boolean = false;
+  let alertEvent: boolean = true;
 
-  if(www) console.log('event');
+  alertEvent ? console.log("event") : null;
 
-  //variable que se encarga de verificar 
+  //variable que se encarga de verificar
   //si un usuario puede acceder o no
-  let c: boolean = true;
+  let validation: boolean = true;
 
-  if(c) console.log('welcome');
-  
+  validation ? console.log("welcome") : null;
 
   //variable para hallar el promedio de 3 numeros
-  const sudo: number = (1 + 2 + 3) / 3;
+  const average: number = (1 + 2 + 3) / 3;
 
-  console.log(sudo);
-  
+  console.log(average);
+
   //variable que almacena el valor de PI
-  let pizza: number = 3.141592654;
+  const PI_VALUE: number = 3.141592654;
 
-  console.log(pizza);
-  
+  console.log(PI_VALUE);
 
-  //variabel que controla si un archivo es modificable 
-  let Bv: boolean = false;
+  //variabel que controla si un archivo es modificable
+  let isEditableFile: boolean = false;
 
-  if(Bv) console.log('edit this file?');
-  
+  isEditableFile
+    ? console.log("edit this file?")
+    : console.log("can't edit this file");
+
   //variable para almacenar el valor de e
-  const eioua: number = 2.718281828; 
-
-
+  const EULER_VALUE: number = 2.718281828;
+  console.log(EULER_VALUE);
 })();

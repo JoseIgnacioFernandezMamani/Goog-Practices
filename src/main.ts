@@ -9,3 +9,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <h2>BUENAS PRACTICAS</h2>
   </div>
 `
+
+
+
